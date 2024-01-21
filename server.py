@@ -1,6 +1,10 @@
 import socket
 import sys
+import rsa
 
+with open('private.pem', mode='rb') as privatefile:
+    keydata = privatefile.read()
+#privkey = rsa.PrivateKey.load_pkcs1(keydata)
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Bind the socket to the port
