@@ -40,10 +40,10 @@ try:
     
     # Send data
     print('sending "%s"' % encrypted_message, file=sys.stderr)
-    sock.sendall(encrypted_message)
+    sock.sendall(message)
 
     amount_received = 0
-    amount_expected = len(encrypted_message)
+    amount_expected = len(message)
     
     while amount_received < amount_expected:
         data = sock.recv(16)
