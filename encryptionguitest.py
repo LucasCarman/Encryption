@@ -3,6 +3,7 @@ from tkinter import ttk
 import aessend as send
 import sys
 import socket
+import threading
 
 
 key = b'Sixteen byte key'
@@ -13,6 +14,10 @@ key = b'Sixteen byte key'
 #    sentFrm.grid()
 #    ttk.Label(sentFrm, text="Secret Key Sent").grid(column=0, row=0)
 #    ttk.Label(sentFrm, text=secret_key.get()).grid(column=0, row=1)
+
+def beginListenThread():
+    x = threading.Thread(target=beginListen)
+    x.start()
 
 def sendMessage():
     send.connectSend(key, message.get())
@@ -63,7 +68,7 @@ listenWidget = Tk()
 listenFrame = ttk.Frame(listenWidget, padding=10)
 listenFrame.grid()
 messageReceived = StringVar()
-ttk.Button(listenFrame, text="Listen", command=beginListen).grid(column=2, row=1)
+ttk.Button(listenFrame, text="Listen", command=beginListenThread).grid(column=2, row=1)
 
 ttk.Label(listenFrame, text="Messages").grid(column=1, row=0)
 messageHistory = ttk.Label(listenFrame, textvariable=messageReceived).grid(column=0, row=2)
