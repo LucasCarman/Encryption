@@ -30,14 +30,17 @@ def beginListen():
         print('waiting for a connection', file=sys.stderr) 
         connection, client_address = sock.accept()
         try:
-            #fullMessage = bytearray(b'')
+            fullMessage = bytearray(b'')
             print('connection from', client_address, file=sys.stderr)
             # Receive the data in small chunks and retransmit it
             while True:
                 data = connection.recv(16)
                 #decrypted_message = rsa.decrypt(data, privkey)
                 print('received "%s"' % data, file=sys.stderr)
-                #fullMessage += data
+                fullMessage += data
+                #print(fullMessage)
+                
+                #messageReceived.set(fullMessage.decode('latin1'))
 
                 if data:
                     print('sending data back to the client', file=sys.stderr)
@@ -50,12 +53,11 @@ def beginListen():
             #print(fullMessage)
             #decrypted_message = rsa.decrypt(fullMessage, privkey)
             #print(decrypted_message)
-            messageReceived.set("hi")
+            (columns, rows) = listenWidget.grid_size()
+            ttk.Label(text=fullMessage.decode('latin1')).grid(column=0, row=rows + 1)
             connection.close()
         sock.close()
         break
-
-    print(messageReceived)
 
 listenWidget = Tk()
 listenFrame = ttk.Frame(listenWidget, padding=10)
