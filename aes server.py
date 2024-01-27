@@ -6,7 +6,7 @@ from Crypto.Random import get_random_bytes
 import re
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = ('localhost', 10000)
+server_address = ('localhost', 10001)
 print('starting up on %s port %s' % server_address, file=sys.stderr) 
 sock.bind(server_address)
 # Listen for incoming connections

@@ -21,7 +21,7 @@ import rsa
 
 
 def connectSend(key, data):
-    sock = socket.create_connection(('localhost', 10000))
+    sock = socket.create_connection(('localhost', 10001))
     cipher = AES.new(key, AES.MODE_EAX)
     ciphertext, tag = cipher.encrypt_and_digest(data.encode('latin1'))
     nonce = cipher.nonce
